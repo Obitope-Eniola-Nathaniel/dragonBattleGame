@@ -5,6 +5,12 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["stick"];
+const sound1 = new Audio("sword.mp3");
+const sound2 = new Audio("home.mp3");
+const sound3 = new Audio("monster.mp3");
+const sound4 = new Audio("dragon.mp3");
+
+
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -109,17 +115,20 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
-  image.src = "home.jpg"
+  image.src = "home.jpg";
+  sound2.play();
 }
 
 function goStore() {
   update(locations[1]);
-  image.src = "weapon.jpg"
+  image.src = "weapon.jpg";
+  sound2.play();
 }
 
 function goCave() {
   update(locations[2]);
   image.src = "cave.jpg"
+  sound2.play();
 }
 
 function buyHealth() {
@@ -169,6 +178,7 @@ function fightSlime() {
   fighting = 0;
   goFight();
   image.src = "game5.jpg"
+  sound3.play()
 }
 
 function fightBeast() {
@@ -181,6 +191,7 @@ function fightDragon() {
   fighting = 2;
   goFight();
   image.src = "dragon.jpg"
+  sound4.play();
 }
 
 function goFight() {
@@ -192,6 +203,7 @@ function goFight() {
 }
 
 function attack() {
+  sound1.play();
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
@@ -215,6 +227,7 @@ function attack() {
     text.innerText += " Your " + inventory.pop() + " breaks.";
     currentWeapon--;
   }
+
 }
 
 function getMonsterAttackValue(level) {
